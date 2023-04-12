@@ -45,7 +45,6 @@ integer counter = 0;
 always @(posedge clk) begin
     if (counter < 9) begin
         //$display("[%0d], PC: %0d, Instruction: %8h", $time, taylor.pc, taylor.inst);
-        taylor.pc <= taylor.pc + 1;
         counter <= counter + 1;
     end
     else begin

@@ -19,23 +19,20 @@ reg [31:0] inst; // current instruction
 
 /**Instruction types**/
 reg [5:0] opcode;
-/**
-reg [25:21] rs;
-reg [20:16] rt;
-reg [15:11] rd;
-reg [10:6] shamt;
+reg [4:0] rs;
+reg [4:0] rt;
+reg [4:0] rd;
+reg [4:0] shamt;
 reg [5:0] funct;
 
 reg [15:0] i_imm;
 
 reg [25:0] j_addr;
-*/
 
-
-/**Instruction Fetch**/
 always @ (posedge(clk)) begin
     /**Instruction Fetch**/
     inst <= rom[pc];
+    pc <= pc + 1;
 
     /**Instruction Decode, Register Fetch**/
     /*
@@ -45,7 +42,7 @@ always @ (posedge(clk)) begin
     */
     opcode <= rom[pc][31:26];
 
-    $display("T: %0d, PC: %0d, OPCODE: %0h", $time, pc, opcode);
+    /////$display("T: %0d, PC: %0d, OPCODE: %0h", $time, pc, opcode);
 
     case (opcode)
     // R-type
@@ -76,14 +73,14 @@ always @ (posedge(clk)) begin
     6'h23: begin
         $display("Lw Instruction: %h\n", inst);
     end
+    6'h2b: begin
+        $display("Sw Instruction: %h\n", inst);
+    end
     // ori
     6'hd: begin
         $display("Ori Instruction: %h\n", inst);
     end
-    default: $display("ERROR OPCODE %b FROM INST %h\n", opcode, inst);
-
     endcase
-
 end
 
 endmodule
