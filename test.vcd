@@ -1,0 +1,102 @@
+$date
+	Wed Apr 12 10:23:55 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module im_tb $end
+$var reg 1 ! clk $end
+$var reg 1 " rst $end
+$var integer 32 # counter [31:0] $end
+$scope module taylor $end
+$var wire 1 ! clk $end
+$var wire 1 " rst $end
+$var reg 32 $ inst [31:0] $end
+$var reg 6 % opcode [5:0] $end
+$var reg 10 & pc [9:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 &
+bx %
+bx $
+b0 #
+x"
+0!
+$end
+#5
+b1000 %
+b100000000100000000000000000101 $
+b1 #
+b1 &
+1!
+#10
+0!
+#15
+b10 #
+b10 &
+b100000000100000000000000000110 $
+1!
+#20
+0!
+#25
+b0 %
+b1001010100100100000100000 $
+b11 #
+b11 &
+1!
+#30
+0!
+#35
+b100 #
+b100 &
+b1001010100100100000100010 $
+1!
+#40
+0!
+#45
+b101 #
+b101 &
+1!
+#50
+0!
+#55
+b110 #
+b110 &
+b100 %
+b10001001010100000000000101010 $
+1!
+#60
+0!
+#65
+b10001001010100000000000101011 $
+b111 #
+b111 &
+1!
+#70
+0!
+#75
+b1000 #
+b1000 &
+b100011 %
+b10001100000010100000000000000000 $
+1!
+#80
+0!
+#85
+b1101 %
+b110100111001110000000011111111 $
+b1001 #
+b1001 &
+1!
+#90
+0!
+#95
+bx %
+bx $
+1!

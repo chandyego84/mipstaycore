@@ -18,7 +18,8 @@ reg [31:0] rom [0:1023]; // instruction memory
 reg [31:0] inst; // current instruction
 
 /**Instruction types**/
-reg [31:26] opcode;
+reg [5:0] opcode;
+/**
 reg [25:21] rs;
 reg [20:16] rt;
 reg [15:11] rd;
@@ -28,6 +29,7 @@ reg [5:0] funct;
 reg [15:0] i_imm;
 
 reg [25:0] j_addr;
+*/
 
 
 /**Instruction Fetch**/
@@ -41,11 +43,13 @@ always @ (posedge(clk)) begin
     I-type: opcode [31:26], rs[25:21], rt[20:16], imm[15:0]
     J-type: opcode [31:26], addr[25:0]
     */
-    opcode <= inst[31:26];
+    opcode <= rom[pc][31:26];
+
+    $display("T: %0d, PC: %0d, OPCODE: %0h", $time, pc, opcode);
 
     case (opcode)
     // R-type
-    6'b0: begin
+    6'h0: begin
         $display("R-Type Instruction: %h\n", inst);
     end
     // addi
@@ -76,6 +80,7 @@ always @ (posedge(clk)) begin
     6'hd: begin
         $display("Ori Instruction: %h\n", inst);
     end
+    default: $display("ERROR OPCODE %b FROM INST %h\n", opcode, inst);
 
     endcase
 
