@@ -8,7 +8,7 @@ module taylor(
 );
 
 reg [9:0] pc; // 1000 instructions
-wire [9:0] nextPc;
+wire [9:0] nextPc; // next program counter value; currently w/out branching or jumps
 
 reg [31:0] inst; // current instruction
 wire [31:0] nextInst; // next instruction; from fetchBlock
@@ -20,16 +20,21 @@ wire [4:0] rt;
 wire [4:0] rd;
 wire [4:0] shamt;
 wire [5:0] funct;
-
 wire [15:0] i_imm;
-
 wire [25:0] j_addr;
 
+assign opcode = inst[31:26];
 assign nextPc = pc + 1;
 
+/**Fetch Instruction**/
 fetch fetchBlock (
     .pc(pc),
     .inst(nextInst)
+);
+
+/**Alter control signals based on instruction**/
+control controller(
+    .opcode(opcode)
 );
 
 always @ (posedge(clk)) begin
@@ -38,14 +43,17 @@ always @ (posedge(clk)) begin
     end
 
     else begin
+    $display("[%0d]: Instruction %h, PC %0d", $time, inst, pc);
     /**Instruction Fetch**/
     inst <= nextInst;
-    /**Instruction Decode, Register Fetch**/
+
+    /**Instruction Decode**/
     /*
     R-type: opcode [31:26], rs[25:21], rt[20:16], rd[15:11], shamt[10:6], funct[5:0]
     I-type: opcode [31:26], rs[25:21], rt[20:16], imm[15:0]
     J-type: opcode [31:26], addr[25:0]
     */
+
 
     /**Execution**/
 
@@ -53,6 +61,7 @@ always @ (posedge(clk)) begin
 
     /**Writeback**/
 
+    // updating pc
     pc <= nextPc;
 
     end
