@@ -13,6 +13,8 @@ module control (
 );
 
 parameter RTYPE = 6'h0; // add, sub, and, or, slt
+    parameter ADD = 2'b00;
+    parameter SUB = 2'b01;
 
 /*I-TYPES*/
 parameter ADDI = 6'h8;
@@ -31,7 +33,7 @@ always @ (opcode) begin
         regDest = 1;
         regWrite = 1;
         aluSrc = 0;
-        aluOp = 2'b00; // currently add, change according to r-type instruction
+        aluOp = 2'b10; // need funct to determine ALU operation 
         memWrite = 0;
         memRead = 0;
         memToReg = 0;
@@ -96,7 +98,7 @@ always @ (opcode) begin
         regDest = 0;
         regWrite = 0;
         aluSrc = 0;
-        aluOp = 3'b000;
+        aluOp = 2'b00; // don't care
         memWrite = 0;
         memRead = 0;
         memToReg = 0;

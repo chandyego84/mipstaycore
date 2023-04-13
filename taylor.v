@@ -24,6 +24,7 @@ wire [15:0] i_imm;
 wire [25:0] j_addr;
 
 assign opcode = inst[31:26];
+assign funct = inst[5:0];
 assign nextPc = pc + 1;
 
 /**Fetch Instruction**/
@@ -43,7 +44,7 @@ always @ (posedge(clk)) begin
     end
 
     else begin
-    $display("[%0d]: Instruction %h, PC %0d", $time, inst, pc);
+    $display("[%0d]: Instruction %h, PC %0d", $time, nextInst, pc);
     /**Instruction Fetch**/
     inst <= nextInst;
 
