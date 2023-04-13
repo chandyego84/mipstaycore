@@ -13,8 +13,6 @@ module control (
 );
 
 parameter RTYPE = 6'h0; // add, sub, and, or, slt
-    parameter ADD = 2'b00;
-    parameter SUB = 2'b01;
 
 /*I-TYPES*/
 parameter ADDI = 6'h8;
@@ -39,7 +37,6 @@ always @ (opcode) begin
         memToReg = 0;
         jump = 0;
         branch = 0;
-        $display("RTYPE INSTRUCTION");
     end
 
     ADDI: begin
@@ -52,7 +49,6 @@ always @ (opcode) begin
         memToReg = 0;
         jump = 0;
         branch = 0;
-        $display("ADDI INSTRUCTION");
     end
 
     BEQ: begin
@@ -65,7 +61,6 @@ always @ (opcode) begin
         memToReg = 0;
         jump = 0;
         branch = 1;
-        $display("BEQ INSTRUCTION");
     end
 
     BNE: begin
@@ -78,7 +73,6 @@ always @ (opcode) begin
         memToReg = 0;
         jump = 0;
         branch = 0;
-        $display("BNE INSTRUCTION");
     end
 
     LW: begin
@@ -91,7 +85,6 @@ always @ (opcode) begin
         memToReg = 1;
         jump = 0;
         branch = 0;
-        $display("LW INSTRUCTION");
     end
 
     JUMP: begin
@@ -104,7 +97,6 @@ always @ (opcode) begin
         memToReg = 0;
         jump = 1;
         branch = 0;
-        $display("JUMP INSTRUCTION");
     end
 
     endcase

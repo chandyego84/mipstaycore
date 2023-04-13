@@ -12,20 +12,22 @@ A single-cycle MIPS Core implemented in Verilog. To be used for TSwift-based MIP
 5. Write-back
 
 ## Operations Implemented
+
+### R-Type
 - add
-- addi
-- addu
 - sub
-- subu
 - and
 - or
-- sll
-- srl
 - slt
-- lw
-- sw
+
+### I-Type
+- addi
 - beq
 - bne
+- lw
+- sw
+
+### J-Type
 - j
 
 ## TODO

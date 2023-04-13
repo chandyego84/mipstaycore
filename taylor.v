@@ -23,19 +23,33 @@ wire [5:0] funct;
 wire [15:0] i_imm;
 wire [25:0] j_addr;
 
+/**Controller**/
+wire [1:0] aluOp;
+
+/**ALU Control Unit**/
+wire [3:0] aluControlOp;
+
 assign opcode = inst[31:26];
 assign funct = inst[5:0];
 assign nextPc = pc + 1;
 
 /**Fetch Instruction**/
-fetch fetchBlock (
+fetch fetchBlock(
     .pc(pc),
     .inst(nextInst)
 );
 
 /**Alter control signals based on instruction**/
 control controller(
-    .opcode(opcode)
+    .opcode(opcode),
+    .aluOp(aluOp)
+);
+
+/**ALU Control**/
+aluControl aluControlUnit(
+    .aluOp(aluOp),
+    .funct(funct),
+    .aluControlOp(aluControlOp)
 );
 
 always @ (posedge(clk)) begin
