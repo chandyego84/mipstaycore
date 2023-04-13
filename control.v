@@ -1,17 +1,16 @@
-// Control Block
-module control(
-    input [5:0] opcode,
-    output regDest,
-    output jump,
-    output branch,
-    output memRead,
-    output memToReg,
-    output aluOp,
-    output memWrite,
-    output aluSrc,
-    output regWrite
+module control (
+    input reg opcode,
+    output wire regDest,
+    output  wire jump,
+    output wire branch,
+    output wire memRead,
+    output wire memToReg,
+    output wire memWrite,
+    output wire regWrite,
+    // alu controls
+    output wire [2:0] aluOp,
+    output wire aluSrc
 );
-
 
 
 

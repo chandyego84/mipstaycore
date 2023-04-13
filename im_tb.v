@@ -13,27 +13,12 @@ initial begin
     $dumpvars(0,im_tb);
 
     $display("im testing.\n");
-    taylor.pc = 0;
+
+    rst = 0;
     clk = 0;
 
-    // ADDI
-    taylor.rom[0] = 32'h20100005;
-    // ADDI
-    taylor.rom[1] = 32'h20100006;
-    // ADD
-    taylor.rom[2] = 32'h012A4820;
-    // SUB
-    taylor.rom[3] = 32'h012A4822;
-    // SUB
-    taylor.rom[4] = 32'h012A4822;
-    // BEQ
-    taylor.rom[5] = 32'h112A002A;
-    // BEQ
-    taylor.rom[6] = 32'h112A002B;
-    // LOAD WORD
-    taylor.rom[7] = 32'h8C0A0000;
-    // ORI
-    taylor.rom[8] = 32'h34E700FF;    
+    taylor.pc = 0;
+
 end
 
 // clk generator
@@ -48,7 +33,7 @@ always @(posedge clk) begin
         counter <= counter + 1;
     end
     else begin
-        $display("taylor fetching stopped after 14th boyfriend.");
+        $display("taylor fetching stopped.");
         $finish;
     end
 end
