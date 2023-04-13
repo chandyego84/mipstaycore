@@ -1,6 +1,9 @@
 # MIPS Taycore
 A single-cycle MIPS Core implemented in Verilog. To be used for TSwift-based MIPS assembly language.
 
+#### Goal
+MIPS Processor -> MIPSwizzle Language -> MIPSwizzle Assembler -> Run on MIPS Processor
+
 ## Single-Cycle Architecture
 ![Single-Cycle](./img/mipsSingleCycle.jpg)
 
