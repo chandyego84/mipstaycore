@@ -23,8 +23,21 @@ wire [5:0] funct;
 wire [15:0] i_imm;
 wire [25:0] j_addr;
 
+assign rs = inst[25:21];
+assign rt = inst[20:16];
+assign rd = inst[15:11];
+assign i_imm = inst[15:0]; // need to sign-extend to 32 bits
+assign j_addr = inst[25:0]; // need to perform: (PC + 4[31:28]) << 2 = 32 bits
+
 /**Controller**/
 wire [1:0] aluOp;
+wire regDest;
+wire jump;
+wire branch;
+wire memRead;
+wire memToReg;
+wire memWrite;
+wire regWrite;
 
 /**ALU Control Unit**/
 wire [3:0] aluControlOp;
@@ -33,10 +46,29 @@ assign opcode = inst[31:26];
 assign funct = inst[5:0];
 assign nextPc = pc + 1;
 
+/**Register Unit**/
+wire [31:0] writeData;
+wire [31:0] rsData;
+wire [31:0] rtData;
+wire [4:0] regRd; // dest address
+
+assign rsData = pc[rs];
+assign rtData = pc[rt];
+
 /**Fetch Instruction**/
 fetch fetchBlock(
     .pc(pc),
     .inst(nextInst)
+);
+
+/**Register Unit**/
+registers regUnit(
+    .regDest(regDest),
+    .regWrite(regWrite),
+    .writeData(writeData),
+    .rsData(rsData),
+    .rtData(rtData),
+    .rd(regRd)
 );
 
 /**Alter control signals based on instruction**/
@@ -68,6 +100,7 @@ always @ (posedge(clk)) begin
     I-type: opcode [31:26], rs[25:21], rt[20:16], imm[15:0]
     J-type: opcode [31:26], addr[25:0]
     */
+
 
 
     /**Execution**/
