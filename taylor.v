@@ -50,10 +50,7 @@ assign nextPc = pc + 1;
 wire [31:0] writeData;
 wire [31:0] rsData;
 wire [31:0] rtData;
-wire [4:0] regRd; // dest address
-
-assign rsData = pc[rs];
-assign rtData = pc[rt];
+wire [4:0] writeReg; // dest address
 
 /**Fetch Instruction**/
 fetch fetchBlock(
@@ -68,7 +65,7 @@ registers regUnit(
     .writeData(writeData),
     .rsData(rsData),
     .rtData(rtData),
-    .rd(regRd)
+    .rd(writeReg)
 );
 
 /**Alter control signals based on instruction**/
@@ -90,7 +87,7 @@ always @ (posedge(clk)) begin
     end
 
     else begin
-    $display("[%0d]: Instruction %h, PC %0d", $time, nextInst, pc);
+    $display("[%0d]: Instruction %h, rsData %d, PC %0d ", $time, nextInst, rsData, pc);
     /**Instruction Fetch**/
     inst <= nextInst;
 
