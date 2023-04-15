@@ -19,6 +19,7 @@ parameter ADDI = 6'h8;
 parameter BEQ = 6'h4;
 parameter BNE = 6'h5;
 parameter LW = 6'h23;
+parameter SW = 6'h2b;
 
 /**J-TYPE**/
 parameter JUMP = 6'h2;
@@ -83,6 +84,18 @@ always @ (opcode) begin
         memWrite = 0;
         memRead = 1;
         memToReg = 1;
+        jump = 0;
+        branch = 0;
+    end
+
+    SW: begin
+        regDest = 0;
+        regWrite = 0;
+        aluSrc = 1;
+        aluOp = 2'b00; // add
+        memWrite = 1;
+        memRead = 0;
+        memToReg = 0;
         jump = 0;
         branch = 0;
     end
