@@ -21,7 +21,10 @@ MIPS Processor -> MIPSwizzle Language -> MIPSwizzle Assembler -> Run on MIPS Pro
 - sub
 - and
 - or
+- nor
 - slt
+- sll
+- srl
 
 ### I-Type
 - addi

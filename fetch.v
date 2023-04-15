@@ -11,15 +11,15 @@ reg [31:0] im [0:1023]; // instruction memory
 
 initial begin
     // Initialize instruction memory with preloaded instructions
-    im[0] = 32'h20100001; // ADDI
-    im[1] = 32'h012A4820; // ADD
-    im[2] = 32'h20100006; // ADDI
-    im[3] = 32'h012A4822; // SUB
-    im[4] = 32'h112A002A; // BEQ
-    im[5] = 32'h012A4822; // SUB
-    im[6] = 32'h112A002B; // BEQ
-    im[7] = 32'h8C0A0000; // LOAD WORD
-    im[8] = 32'h8C0A0000; // LOAD WORD
+    im[0] = 32'h2004001b; // ADDI
+    im[1] = 32'h38850005; // XORI
+    im[2] = 32'h00853020; // ADD
+    im[3] = 32'h00a43822; // SUB
+    im[4] = 32'h00e6402a; // SLT
+    im[5] = 32'h00e04825; // OR
+    im[6] = 32'h00e05024; // AND
+    im[7] = 32'h00075840; // SLL
+    im[8] = 32'h00076042; // SRL
 end
 
 assign inst = im[pc];
