@@ -11,8 +11,9 @@ reg [31:0] im [0:1023]; // instruction memory
 
 initial begin
     // Initialize instruction memory with preloaded instructions
+    // THIS SHIT DOESNT WORK. NEED TO CHANGE INSTRUCTIONS...
     im[0] = 32'h2004001b; // ADDI
-    im[1] = 32'h38850005; // XORI
+    im[1] = 32'h2005001B; // ADDI
     im[2] = 32'h00853020; // ADD
     im[3] = 32'h00a43822; // SUB
     im[4] = 32'h00e6402a; // SLT

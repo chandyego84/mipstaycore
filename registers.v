@@ -33,13 +33,18 @@ module registers(
 reg [31:0] regs [31:0]; // 32 registers, one word each
 reg [4:0] writeReg; // address of reg to write to
 
+integer r;
 initial begin
-    regs[0] = 32'b0; // $0 = 0
+    // TODO: Ensure register $0 CANNOT be changed. must stay $zero
+    for (r = 0; r < 32; r = r + 1) begin
+        regs[r] = 32'b0;
+    end
 end
 
 always @ (rs, rt) begin
     writeReg = regDest ? rd : rt;
 
+    // TOOD: DOES NOT WORK UNTIL REGISTERS ACTUALLY WRITTEN INTO
     rsData <= regs[rs];
     rtData <= regs[rt];
 end

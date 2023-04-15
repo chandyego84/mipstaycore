@@ -33,6 +33,7 @@ parameter SRL = 4'b1000; // shift right
 /**I MADE UP THESE ALU CONTROL CODES FOR SHIFTING. IDK WHAT IS CORRECT/STANDARD.**/
 
 always @ (aluOp) begin
+    $display("aluOp is CHANGING!!!: %b", funct);
     case(aluOp)
     RTYPE: begin
         aluControlOp <= funct == r_and ? AND :
@@ -42,7 +43,7 @@ always @ (aluOp) begin
                         (funct == r_sub ? SUB :
                         (funct == r_slt ? SLT :
                         (funct == r_sll ? SLL :
-                        (funct == r_srl ? SRL : ADD))))))); // default to add
+                        (funct == r_srl ? SRL : ADD))))))); // default to add. TODO: change default?
     end
 
     ITYPE: begin
