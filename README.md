@@ -10,6 +10,11 @@ MIPS Processor -> MIPSwizzle Language -> MIPSwizzle Assembler -> Run on MIPS Pro
 ## Register Set
 ![Registers](./img/registerSet.jpg)
 
+## Notes/Personal Considerations
+- Currently, instruction memory is not byte-addressable. PC still works, but this deviates from original ISA.
+- Would be good exercise to fully design the ALU myself and reduce abstractions.
+- SLL and SRL alu control signals are probably not correct; I made them up. Need to refer to official ISA doc.
+
 ## Stages
 1. Instruction Fetch
 2. Instruction Decode

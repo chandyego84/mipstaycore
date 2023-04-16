@@ -16,8 +16,6 @@ gp: 28 // global data pointer
 sp: 29 // stack pointer
 fp: 30 // frame pointer
 ra: 31 // return address
-
-HOW DO I TEST THIS??? GOODNESS GRACIOUS.
 */
 module registers(
     input wire regDest,
@@ -44,7 +42,6 @@ end
 always @ (rs, rt) begin
     writeReg = regDest ? rd : rt;
 
-    // TOOD: DOES NOT WORK UNTIL REGISTERS ACTUALLY WRITTEN INTO
     rsData <= regs[rs];
     rtData <= regs[rt];
 end

@@ -10,17 +10,16 @@ module fetch (
 reg [31:0] im [0:1023]; // instruction memory
 
 initial begin
-    // Initialize instruction memory with preloaded instructions
-    // THIS SHIT DOESNT WORK. NEED TO CHANGE INSTRUCTIONS...
-    im[0] = 32'h2004001b; // ADDI
-    im[1] = 32'h2005001B; // ADDI
-    im[2] = 32'h00853020; // ADD
-    im[3] = 32'h00a43822; // SUB
-    im[4] = 32'h00e6402a; // SLT
-    im[5] = 32'h00e04825; // OR
-    im[6] = 32'h00e05024; // AND
-    im[7] = 32'h00075840; // SLL
-    im[8] = 32'h00076042; // SRL
+    // For testing: Initialize instruction memory with preloaded instructions
+    im[0] = 32'h20020005; // addi $2, $0, 5	
+    im[1] = 32'h20070003; // addi $7, $0, 3
+    im[2] = 32'h00e22025; // or $4, $7, $2	
+    im[3] = 32'h00642824; // and $5, $3, $4
+    im[4] = 32'h00a42820; // add $5, $5, $4
+    im[5] = 32'h0064302a; // slt $6, $3, $4
+    im[6] = 32'h2005000a; // addi $5, $0, 10
+    im[7] = 32'h00c53820; // add $7, $6, $5
+    im[8] = 32'h00e23822; // sub $7, $7, $2
 end
 
 assign inst = im[pc];

@@ -32,7 +32,7 @@ parameter SLL = 4'b0100; // shift left
 parameter SRL = 4'b1000; // shift right
 /**I MADE UP THESE ALU CONTROL CODES FOR SHIFTING. IDK WHAT IS CORRECT/STANDARD.**/
 
-always @ (aluOp) begin
+always @ (*) begin
     case(aluOp)
     RTYPE: begin
         aluControlOp <= funct == r_and ? AND :
