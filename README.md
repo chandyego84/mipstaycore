@@ -7,6 +7,9 @@ MIPS Processor -> MIPSwizzle Language -> MIPSwizzle Assembler -> Run on MIPS Pro
 ## Single-Cycle Architecture
 ![Single-Cycle](./img/mipsSingleCycle.jpg)
 
+## Register Set
+![Registers](./img/registerSet.jpg)
+
 ## Stages
 1. Instruction Fetch
 2. Instruction Decode

@@ -98,6 +98,8 @@ always @ (posedge(clk)) begin
     I-type: opcode [31:26], rs[25:21], rt[20:16], imm[15:0]
     J-type: opcode [31:26], addr[25:0]
     */
+    regUnit.regs[rt] = 32'b1;
+    $display("rd, rs, rt number: %b, %b, %b", rd, rs, rt);
 
     /**Execution**/
 
