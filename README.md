@@ -12,7 +12,7 @@ MIPS Processor -> MIPSwizzle Language -> MIPSwizzle Assembler -> Run on MIPS Pro
 
 ## Notes/Personal Considerations
 - Currently, instruction memory is not byte-addressable. PC still works, but this deviates from original ISA.
-- Would be good exercise to fully design the ALU myself and reduce abstractions.
+- Would be good exercise to design the ALU from scratch and include exceptions such as overflow.
 - SLL and SRL alu control signals are probably not correct; I made them up. Need to refer to official ISA doc.
 
 ## Stages

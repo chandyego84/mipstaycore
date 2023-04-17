@@ -27,10 +27,10 @@ parameter NOR = 4'b1100;
 parameter ADD = 4'b0010;
 parameter SUB = 4'b0110;
 parameter SLT = 4'b0111; // set on less than
-/**I MADE UP THESE ALU CONTROL CODES FOR SHIFTING. IDK WHAT IS CORRECT/STANDARD.**/
+/**I MADE UP THESE ALU CONTROL CODES FOR SHIFTING. IDK WHAT IS STANDARD.**/
 parameter SLL = 4'b0100; // shift left
 parameter SRL = 4'b1000; // shift right
-/**I MADE UP THESE ALU CONTROL CODES FOR SHIFTING. IDK WHAT IS CORRECT/STANDARD.**/
+/**I MADE UP THESE ALU CONTROL CODES FOR SHIFTING. IDK WHAT IS STANDARD.**/
 
 always @ (*) begin
     case(aluOp)

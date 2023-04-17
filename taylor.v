@@ -21,16 +21,19 @@ wire [4:0] rd;
 wire [4:0] shamt;
 wire [5:0] funct;
 wire [15:0] i_imm;
+wire [31:0] i_extImm;
 wire [25:0] j_addr;
 
 assign rs = inst[25:21];
 assign rt = inst[20:16];
 assign rd = inst[15:11];
-assign i_imm = inst[15:0]; // need to sign-extend to 32 bits
+assign i_imm = inst[15:0];
+assign i_extImm = $signed(i_imm);
 assign j_addr = inst[25:0]; // need to perform: (PC + 4[31:28]) << 2 = 32 bits
 
 /**Controller**/
 wire [1:0] aluOp;
+wire aluSrc;
 wire regDest;
 wire jump;
 wire branch;
@@ -50,6 +53,9 @@ assign nextPc = pc + 1;
 wire [31:0] writeData;
 wire [31:0] rsData;
 wire [31:0] rtData;
+
+/**ALU Unit**/
+wire [31:0] aluResult;
 
 /**Fetch Instruction**/
 fetch fetchBlock(
@@ -72,7 +78,15 @@ registers regUnit(
 /**Alter control signals based on instruction**/
 control controller(
     .opcode(opcode),
-    .aluOp(aluOp)
+    .aluOp(aluOp),
+    .aluSrc(aluSrc),
+    .regDest(regDest),
+    .jump(jump),
+    .branch(branch),
+    .memRead(memRead),
+    .memToReg(memToReg),
+    .memWrite(memWrite),
+    .regWrite(regWrite)
 );
 
 /**ALU Control**/
@@ -80,6 +94,17 @@ aluControl aluControlUnit(
     .aluOp(aluOp),
     .funct(funct),
     .aluControlOp(aluControlOp)
+);
+
+/**ALU**/
+alu aluUnit(
+    .aluControlOp(aluControlOp),
+    .aluSrc(aluSrc),
+    .rsData(rsData),
+    .rtData(rtData),
+    .shamt(shamt),
+    .imm(i_extImm),
+    .result(aluResult)
 );
 
 always @ (posedge(clk)) begin
@@ -98,8 +123,7 @@ always @ (posedge(clk)) begin
     I-type: opcode [31:26], rs[25:21], rt[20:16], imm[15:0]
     J-type: opcode [31:26], addr[25:0]
     */
-    regUnit.regs[rt] = 32'b1;
-    $display("rd, rs, rt number: %b, %b, %b", rd, rs, rt);
+    $display("rd, rs, rt, result number: %b, %b, %b, %0d", rd, rs, rt, aluResult);
 
     /**Execution**/
 
